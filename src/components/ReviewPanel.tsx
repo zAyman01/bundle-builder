@@ -31,7 +31,7 @@ export const ReviewPanel = ({ state }: Props) => {
           <h2 className="text-[#1f1f1f] text-[22px] font-medium tracking-[0.6px] leading-5.5">
             Your security system
           </h2>
-          <p className="text-[#1f1f1fbf] text-xs tracking-[0.6px] leading-4 font-semibold">
+          <p className="text-[#1f1f1fbf] text-[14px] tracking-[0.6px] leading-4 font-normal">
             Review your personalized protection system designed to keep what matters most safe.
           </p>
         </header>
@@ -40,8 +40,8 @@ export const ReviewPanel = ({ state }: Props) => {
           {reviewLines
             .filter(({ lines }) => lines.length > 0)
             .map(({ step, lines }) => (
-              <div key={step.id} className="flex flex-col gap-2 pt-3.75 border-t border-[#ced6de]">
-                <div className="text-[#767676] text-xs tracking-[0.36px] leading-4">
+              <div key={step.id} className="flex flex-col gap-2 pt-3.75 border-t border-[#A8B2BD]">
+                <div className="text-[#A8B2BD] text-xs tracking-[0.36px] leading-4">
                   {categoryLabel[step.id]}
                 </div>
                 <div className="flex flex-col gap-3">
@@ -55,7 +55,7 @@ export const ReviewPanel = ({ state }: Props) => {
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <div className="flex-1 min-w-0 text-[#1f1f1f] text-xs tracking-[0.07px] leading-4 font-semibold truncate">
+                        <div className="flex-1 min-w-0 text-[#0B0D10] text-[14px] tracking-[0.07px] leading-4 font-normal truncate">
                           {line.name}
                         </div>
                         <QuantityStepper
@@ -69,11 +69,11 @@ export const ReviewPanel = ({ state }: Props) => {
                       </div>
                       <div className="flex flex-col items-end shrink-0">
                         {line.unitOriginalPrice && (
-                          <div className="text-[#767676] text-sm text-right tracking-[0.07px] leading-4 line-through">
+                          <div className="text-[#6F7882] text-sm text-right tracking-[0.07px] leading-4 line-through">
                             ${(line.unitOriginalPrice * line.qty).toFixed(2)}
                           </div>
                         )}
-                        <div className="text-[#4e2fd2] text-sm text-right tracking-[0.07px] leading-4 font-semibold">
+                        <div className="text-[#4E2FD2] text-sm text-right tracking-[0.07px] leading-4 font-semibold">
                           ${(line.unitPrice * line.qty).toFixed(2)}
                         </div>
                       </div>
@@ -118,8 +118,8 @@ export const ReviewPanel = ({ state }: Props) => {
             ))}
 
           {selectedPlan && (
-            <div className="flex flex-col gap-2 pt-3.75 border-t border-[#ced6de]">
-              <div className="text-[#767676] text-xs tracking-[0.36px] leading-4">PLAN</div>
+            <div className="flex flex-col gap-2 pt-3.75 border-t border-[#A8B2BD]">
+              <div className="text-[#A8B2BD] text-xs tracking-[0.36px] leading-4">PLAN</div>
               <div className="flex items-start justify-between w-full">
                 <div className="flex items-center gap-2">
                   {selectedPlan.id === "cam-unlimited" && <WyzeShield className="w-8 h-8 shrink-0" />}
@@ -180,7 +180,7 @@ export const ReviewPanel = ({ state }: Props) => {
 
           <div className="flex flex-col gap-1 pt-2.5">
             {savings > 0 && (
-              <p className="text-[#0aa288] text-xs text-center font-semibold tracking-[-0.06px] leading-3">
+              <p className="text-[#0AA288] text-xs text-center font-semibold tracking-[-0.06px] leading-3">
                 Congrats! You&apos;re saving ${savings.toFixed(2)} on your security bundle!
               </p>
             )}
@@ -189,7 +189,7 @@ export const ReviewPanel = ({ state }: Props) => {
               onClick={() => setCheckedOut(true)}
               className="flex items-center justify-center gap-2 px-4 py-3.25 w-full bg-[#4e2fd2] rounded text-white text-[17px] font-bold cursor-pointer transition-colors hover:bg-[#3d23a8]"
             >
-              {checkedOut ? "Thanks for your order! 🎉" : "Checkout"}
+              {checkedOut ? "Thanks for your order!" : "Checkout"}
             </button>
           </div>
         </div>

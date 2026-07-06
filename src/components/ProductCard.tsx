@@ -70,7 +70,7 @@ export const ProductCard = ({
                     aria-pressed={isSelected}
                     aria-label={`${product.name} ${v.label}`}
                     className={`flex h-7 items-center gap-1 px-1.5 rounded-sm border-[0.5px] cursor-pointer transition-colors ${
-                      isSelected ? "bg-[#1df0bb0a] border-[#0aa288]" : "bg-white border-[#cccccc] hover:bg-gray-50 hover:border-[#999]"
+                      isSelected ? "bg-[#1df0bb0a] border-[#0AA288]" : "bg-white border-[#cccccc] hover:bg-gray-50 hover:border-[#999]"
                     }`}
                   >
                     <img
@@ -98,7 +98,7 @@ export const ProductCard = ({
           />
           <div className="flex flex-col items-end gap-0.75 flex-1">
             {product.originalPrice && (
-              <div className="text-[#d8392b] text-base text-right tracking-[0.6px] leading-4 line-through">
+              <div className="text-[#D8392B] text-base text-right tracking-[0.6px] leading-4 line-through">
                 ${product.originalPrice.toFixed(2)}
               </div>
             )}

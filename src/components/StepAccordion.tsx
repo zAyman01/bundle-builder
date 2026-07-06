@@ -6,17 +6,17 @@ import {
   CameraIcon,
   ChevronDown,
   ChevronUp,
-  ExtraProtectionIcon,
+  PlanIcon,
+  ProtectionIcon,
   SensorIcon,
-  ShieldIcon,
   WyzeShield,
 } from "./icons";
 
 const stepIcon: Record<StepId, (className?: string) => ReactElement> = {
   cameras: (c) => <CameraIcon className={c} />,
-  plan: (c) => <ShieldIcon className={c} />,
+  plan: (c) => <PlanIcon className={c} />,
   sensors: (c) => <SensorIcon className={c} />,
-  protection: (c) => <ExtraProtectionIcon className={c} />,
+  protection: (c) => <ProtectionIcon className={c} />,
 };
 
 const nextLabel: Record<StepId, string | null> = {
@@ -44,7 +44,7 @@ export const StepAccordion = ({ step, totalSteps, state }: Props) => {
       }`}
     >
       <div className="px-3.75">
-        <div className="text-[#484848] text-[10px] sm:text-xs tracking-[1.6px] leading-3">
+        <div className="text-[#484848] text-[12px] sm:text-xs tracking-[1.6px] leading-3">
           STEP {step.stepNumber} OF {totalSteps}
         </div>
       </div>
@@ -60,14 +60,14 @@ export const StepAccordion = ({ step, totalSteps, state }: Props) => {
       >
         <div className="flex items-center gap-2 flex-1 min-w-0">
           {stepIcon[step.id]("w-[26px] h-[26px] shrink-0")}
-          <h2 className="flex-1 text-[#1f1f1f] text-lg sm:text-[22px] font-[550] tracking-normal leading-5.5 truncate">
+          <h2 className="flex-1 text-[#0B0D10] text-lg sm:text-[22px] font-medium tracking-normal leading-5.5 truncate">
             {step.title}
           </h2>
         </div>
         <span className="flex items-center gap-1 shrink-0">
           {isOpen ? (
             <>
-              <span className="text-[#4e2fd2] text-sm leading-4 font-bold">{count} selected</span>
+              <span className="text-[#4e2fd2] text-sm leading-4 font-normal">{count} selected</span>
               <ChevronUp />
             </>
           ) : (

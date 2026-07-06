@@ -46,7 +46,7 @@ export const QuantityStepper = ({
 
       <div
         aria-live="polite"
-        className="w-6 text-center font-medium text-[#1f1f1f] text-base tabular-nums"
+        className="w-6 text-center font-normal text-[#0B0D10] text-base tabular-nums"
       >
         {qty}
       </div>
