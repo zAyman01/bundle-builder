@@ -87,6 +87,5 @@ Page stacks to single column below `xl` (1280px). Product grid uses flex-wrap wi
 
 ## Known Gaps
 
-- Product images are single placeholder URLs — swap `src` values for real photography.
 - Checkout is a UI-only flow; no payment integration.
 - Only tested in modern Chromium/Firefox.
