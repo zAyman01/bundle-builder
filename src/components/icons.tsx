@@ -1,10 +1,5 @@
 type IconProps = { className?: string };
 
-import cameraVector from "../../public/camera-vector.png";
-import planVector from "../../public/plan-vector.png";
-import protectionVector from "../../public/protection-vector.png";
-import sensorVector from "../../public/sensors-vector.png";
-
 export const ChevronUp = ({ className = "w-3 h-3" }: IconProps) => (
   <svg viewBox="0 0 12 12" fill="none" className={className} aria-hidden="true">
     <path
@@ -53,19 +48,19 @@ export const Minus = ({
 );
 
 export const CameraIcon = ({ className }: IconProps) => (
-  <img src={cameraVector} className={`${className} object-contain`} alt="" draggable={false} />
+  <img src="/camera-vector.png" className={`${className} object-contain`} alt="" draggable={false} />
 );
 
 export const PlanIcon = ({ className }: IconProps) => (
-  <img src={planVector} className={`${className} object-contain`} alt="" draggable={false} />
+  <img src="/plan-vector.png" className={`${className} object-contain`} alt="" draggable={false} />
 );
 
 export const ProtectionIcon = ({ className }: IconProps) => (
-  <img src={protectionVector} className={`${className} object-contain`} alt="" draggable={false} />
+  <img src="/protection-vector.png" className={`${className} object-contain`} alt="" draggable={false} />
 );
 
 export const SensorIcon = ({ className }: IconProps) => (
-  <img src={sensorVector} className={`${className} object-contain`} alt="" draggable={false} />
+  <img src="/sensors-vector.png" className={`${className} object-contain`} alt="" draggable={false} />
 );
 
 export const ShieldIcon = ({ className = "w-6.5 h-6.5" }: IconProps) => (

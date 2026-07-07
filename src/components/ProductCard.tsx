@@ -3,13 +3,11 @@ import { QuantityStepper } from "./QuantityStepper";
 
 type Props = {
   product: Product;
-  qty: number; // active variant's quantity
+  qty: number;
   activeVariantId?: string;
   onSelectVariant: (variantId: string) => void;
   onIncrement: () => void;
   onDecrement: () => void;
-  /** The lone trailing card in an odd-count row (e.g. Battery Cam Pro) — fixed ~360px, not stretched. */
-  wide?: boolean;
 };
 
 export const ProductCard = ({
@@ -19,17 +17,16 @@ export const ProductCard = ({
   onSelectVariant,
   onIncrement,
   onDecrement,
-  wide = false,
 }: Props) => {
   const selected = qty > 0;
 
   return (
     <article
-      className={`flex flex-col sm:flex-row gap-3 sm:gap-4.75 p-2.75 relative bg-white rounded-[10px] overflow-hidden border-2 h-full sm:items-center ${
-        wide ? "w-full md:max-w-90" : "flex-1 min-w-65"
-      } ${selected ? "border-[#4e2fd2b2]" : "border-transparent"}`}
+      className={`flex flex-col xl:flex-row gap-3 xl:gap-4.75 p-2.75 relative bg-white rounded-[10px] overflow-hidden border-2 h-full xl:items-center ${
+        selected ? "border-[#4e2fd2b2]" : "border-transparent"
+      }`}
     >
-      <div className="flex items-center justify-center w-full h-28 sm:w-25 sm:h-32.5 rounded-[5px] shrink-0 overflow-hidden">
+      <div className="flex items-center justify-center w-full h-20 sm:h-24 xl:w-25 xl:h-32.5 rounded-[5px] shrink-0 overflow-hidden">
         <img
           src={product.image}
           alt={product.name}
@@ -59,7 +56,7 @@ export const ProductCard = ({
           </p>
 
           {product.variants && (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 flex-wrap">
               {product.variants.map((v) => {
                 const isSelected = activeVariantId === v.id;
                 return (
@@ -69,7 +66,7 @@ export const ProductCard = ({
                     onClick={() => onSelectVariant(v.id)}
                     aria-pressed={isSelected}
                     aria-label={`${product.name} ${v.label}`}
-                    className={`flex h-7 items-center gap-1 px-1.5 rounded-sm border-[0.5px] cursor-pointer transition-colors ${
+                    className={`flex items-center gap-1 px-1.5 py-1 rounded-sm border-[0.5px] cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4e2fd2] ${
                       isSelected ? "bg-[#1df0bb0a] border-[#0AA288]" : "bg-white border-[#cccccc] hover:bg-gray-50 hover:border-[#999]"
                     }`}
                   >

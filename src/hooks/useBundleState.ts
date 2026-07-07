@@ -3,10 +3,10 @@ import {
   seedActiveVariant,
   seedPlanId,
   seedQuantities,
-  senseHub,
-  steps,
+  senseHub as fallbackSenseHub,
+  steps as fallbackSteps,
 } from "../data/bundle";
-import type { StepId } from "../types";
+import type { Step, StepId } from "../types";
 
 const STORAGE_KEY = "bundle-builder:saved-system-v1";
 
@@ -29,6 +29,9 @@ export function useBundleState() {
   const [planId, setPlanId] = useState<string>(seedPlanId);
   const [openStep, setOpenStep] = useState<StepId | null>("cameras");
   const [justSaved, setJustSaved] = useState(false);
+  const [steps, setSteps] = useState<Step[]>(fallbackSteps);
+  const [senseHub, setSenseHub] = useState(fallbackSenseHub);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     try {
@@ -42,9 +45,25 @@ export function useBundleState() {
     }
   }, []);
 
+  useEffect(() => {
+    fetch("/api/bundle")
+      .then((r) => {
+        if (!r.ok) throw new Error("API unavailable");
+        return r.json();
+      })
+      .then((data) => {
+        setSteps(data.steps);
+        setSenseHub(data.senseHub);
+      })
+      .catch(() => {
+        /* fallback to static data already set as defaults */
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
   const allProducts = useMemo(
     () => steps.flatMap((s) => s.products ?? []),
-    [],
+    [steps],
   );
 
   const getProductById = useCallback(
@@ -128,14 +147,12 @@ export function useBundleState() {
     const idx = steps.findIndex((s) => s.id === currentId);
     const next = steps[idx + 1];
     if (next) setOpenStep(next.id);
-  }, []);
+  }, [steps]);
 
   const selectedPlan = useMemo(
     () => steps.find((s) => s.id === "plan")?.plans?.find((p) => p.id === planId),
-    [planId],
+    [planId, steps],
   );
-
-
 
   const reviewLines = useMemo(() => {
     return steps
@@ -209,7 +226,11 @@ export function useBundleState() {
   const savings = Math.max(0, grandTotal.original - grandTotal.current);
   const financingMonthly = grandTotal.current / 12;
 
-
+  const resetAll = useCallback(() => {
+    setQuantities({});
+    setActiveVariant({});
+    setPlanId("no-plan");
+  }, []);
 
   const saveForLater = useCallback(() => {
     const payload: SavedSystem = {
@@ -248,6 +269,9 @@ export function useBundleState() {
     financingMonthly,
     saveForLater,
     justSaved,
+    loading,
+    senseHub,
+    resetAll,
   };
 }
 

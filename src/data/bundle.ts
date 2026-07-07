@@ -157,12 +157,7 @@ export const senseHub = {
   image: "/wyze-sensehub.png",
 };
 
-export const seedQuantities: Record<string, number> = {
-  "wyze-cam-v4:white": 1,
-  "wyze-cam-pan-v3:white": 2,
-  "wyze-sense-motion-sensor:white": 2,
-  "wyze-microsd-256:default": 2,
-};
+export const seedQuantities: Record<string, number> = {};
 
 export const seedActiveVariant: Record<string, string> = {
   "wyze-cam-v4": "white",
@@ -172,4 +167,4 @@ export const seedActiveVariant: Record<string, string> = {
   "wyze-sense-motion-sensor": "white",
 };
 
-export const seedPlanId = "cam-unlimited";
+export const seedPlanId = "no-plan";

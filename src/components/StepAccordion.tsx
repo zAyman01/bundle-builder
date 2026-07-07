@@ -54,7 +54,7 @@ export const StepAccordion = ({ step, totalSteps, state }: Props) => {
         onClick={() => state.toggleStep(step.id)}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className={`flex items-center gap-2 px-3.75 py-5 w-full text-left cursor-pointer transition-colors ${
+        className={`flex items-center gap-2 px-3.75 py-5 w-full text-left cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4e2fd2] ${
           isOpen ? "border-t-[0.5px]" : "border-t-[0.5px] border-b-[0.5px]"
         } border-[#1f1f1f] hover:bg-[#edf4ff]/50`}
       >
@@ -76,20 +76,19 @@ export const StepAccordion = ({ step, totalSteps, state }: Props) => {
         </span>
       </button>
 
-      {isOpen && (
-        <div id={panelId} className="flex flex-col gap-3.75 px-3.75 pb-5">
+      <div
+        className="grid transition-[grid-template-rows] duration-300 ease-out"
+        style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+      >
+        <div className="overflow-hidden">
+        <div id={panelId} className={`flex flex-col gap-3.75 px-3.75 pb-5 ${isOpen ? '' : 'invisible'}`}>
           {step.products && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.75">
-              {step.products.map((product, i) => {
+            <div className="flex flex-row flex-wrap justify-center gap-3.75 lg:grid lg:grid-cols-5 xl:flex xl:flex-wrap xl:justify-center xl:gap-3.75">
+              {step.products.map((product) => {
                 const activeVariantId = state.getActiveVariantId(product.id);
                 const qty = state.getVariantQty(product.id, activeVariantId);
-                const isTrailingLone =
-                  i === step.products!.length - 1 && step.products!.length % 2 === 1;
                 return (
-                  <div
-                    key={product.id}
-                    className={isTrailingLone ? "md:col-span-2 md:flex md:justify-center" : "h-full"}
-                  >
+                  <div key={product.id} className="w-full sm:w-[calc(50%-7.5px)] md:w-[calc(33.33%-10px)] lg:w-auto xl:w-[calc(50%-7.5px)]">
                     <ProductCard
                       product={product}
                       qty={qty}
@@ -97,7 +96,6 @@ export const StepAccordion = ({ step, totalSteps, state }: Props) => {
                       onSelectVariant={(variantId) => state.selectVariant(product.id, variantId)}
                       onIncrement={() => state.bumpActive(product.id, 1)}
                       onDecrement={() => state.bumpActive(product.id, -1)}
-                      wide={isTrailingLone}
                     />
                   </div>
                 );
@@ -115,7 +113,7 @@ export const StepAccordion = ({ step, totalSteps, state }: Props) => {
                     type="button"
                     onClick={() => state.setPlanId(plan.id)}
                     aria-pressed={isSelected}
-                    className={`flex-1 text-left p-4 rounded-[10px] bg-white border-2 cursor-pointer transition-colors ${
+                    className={`flex-1 text-left p-4 rounded-[10px] bg-white border-2 cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4e2fd2] ${
                       isSelected ? "border-[#4e2fd2b2]" : "border-transparent hover:border-[#4e2fd2]/30"
                     }`}
                   >
@@ -142,7 +140,7 @@ export const StepAccordion = ({ step, totalSteps, state }: Props) => {
             <button
               type="button"
               onClick={() => state.goToNextStep(step.id)}
-              className="self-center inline-flex h-9.75 items-center justify-center px-6 rounded-[7px] border border-[#4e2fd2] cursor-pointer transition-colors hover:bg-[#4e2fd2]/10"
+              className="self-center inline-flex min-h-10 items-center justify-center px-6 rounded-[7px] border border-[#4e2fd2] cursor-pointer transition-colors hover:bg-[#4e2fd2]/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4e2fd2]"
             >
               <span className="text-[#4e2fd2] text-base sm:text-lg font-semibold leading-6">
                 {nextLabel[step.id]}
@@ -150,7 +148,8 @@ export const StepAccordion = ({ step, totalSteps, state }: Props) => {
             </button>
           )}
         </div>
-      )}
+        </div>
+      </div>
     </div>
   );
 };
